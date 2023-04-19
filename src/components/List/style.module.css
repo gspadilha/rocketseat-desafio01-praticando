@@ -1,0 +1,33 @@
+.resumoTarefas {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.tarefasCriadas {
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: var(--blue);
+}
+
+.tarefasConcluidas {
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: var(--purple);
+}
+
+.tarefasCriadas>span, .tarefasConcluidas>span {
+    font-size: 0.75rem;
+    color: var(--gray-200);
+
+    background: var(--gray-400);
+    border-radius: 999px;
+
+    padding: 2px 8px;
+    margin-left: 8px;
+}
+
+.tarefas {
+    width: 100%;
+}
