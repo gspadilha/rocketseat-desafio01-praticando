@@ -1,0 +1,32 @@
+.wrapperListaVazia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 64px 24px;
+    height: 244px;
+
+    margin-top: 24px;
+    border-top: 1px solid var(--gray-400);
+    border-radius: 8px;
+}
+
+.wrapperListaVazia>img {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 16px;
+}
+
+.wrapperListaVazia>label {
+    color: var(--gray-300);
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.wrapperListaVazia>span {
+    color: var(--gray-300);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.4;
+}

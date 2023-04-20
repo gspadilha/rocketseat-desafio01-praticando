@@ -18,7 +18,7 @@
     margin-top: 24px;
 }
 
-.tarefa>label {
+.tarefa>p {
     font-size: 0.875rem;
     line-height: 1.4;
     flex: 1;
@@ -34,5 +34,4 @@
     color: var(--gray-300);
     font-style: italic;
     text-decoration: line-through;
-
 }
