@@ -829,6 +829,11 @@
     "@testing-library/dom" "^9.0.0"
     "@types/react-dom" "^18.0.0"
 
+"@testing-library/user-event@^14.4.3":
+  version "14.4.3"
+  resolved "https://registry.yarnpkg.com/@testing-library/user-event/-/user-event-14.4.3.tgz#af975e367743fa91989cd666666aec31a8f50591"
+  integrity sha512-kCUc5MEwaEMakkO5x7aoD+DLi02ehmEM2QCGWvNqAS1dV/fAvORWEjnjsEIvml59M7Y5kCkWN6fCCyPOe8OL6Q==
+
 "@tootallnate/once@2":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"
@@ -4613,10 +4618,10 @@ v8-to-istanbul@^9.0.1:
     "@types/istanbul-lib-coverage" "^2.0.1"
     convert-source-map "^1.6.0"
 
-vite@^4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-4.3.0.tgz#1fb9432e1980cf254e1ae1b7b8981fd262c6aa49"
-  integrity sha512-JTGFgDh3dVxeGBpuQX04Up+JZmuG6wu9414Ei36vQzaEruY/M4K0AgwtuB2b4HaBgB7R8l+LHxjB0jcgz4d2qQ==
+vite@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-4.3.1.tgz#9badb1377f995632cdcf05f32103414db6fbb95a"
+  integrity sha512-EPmfPLAI79Z/RofuMvkIS0Yr091T2ReUoXQqc5ppBX/sjFRhHKiPPF/R46cTdoci/XgeQpB23diiJxq5w30vdg==
   dependencies:
     esbuild "^0.17.5"
     postcss "^8.4.21"
