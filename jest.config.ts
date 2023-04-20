@@ -21,6 +21,12 @@ const config: Config = {
   },
 
   testEnvironment: 'jsdom',
+
+  collectCoverageFrom: [
+    '<rootDir>/src/components/**/*.ts*',
+    '<rootDir>/src/context/**/*.ts*',
+    '<rootDir>/src/hooks/**/*.ts*',
+  ],
 };
 
 export default config;
