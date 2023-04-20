@@ -60,7 +60,7 @@ export const TodoContextProvider: React.FC<ITodoProviderProps> = ({
       done: false,
     };
 
-    setAtividades([...atividades, novaAtividade]);
+    setAtividades(atividadesAntigas => [...atividadesAntigas, novaAtividade]);
   }
 
   function deletarAtividade(id: number) {
