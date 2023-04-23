@@ -6,27 +6,24 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { testarValidacaoDoNavegador } from '../../../test/jest/__utils__/form';
-
 import { Formulario } from './index';
 
 const inserirAtividade = jest.fn();
 const renderFormulario = () =>
   render(<Formulario inserirAtividade={inserirAtividade} />);
 
-let componenteRenderizado: RenderResult;
-
 describe('Formulario', () => {
   it('Deve renderizar o componente', () => {
     renderFormulario();
+
     expect(screen.getByTestId('formulario')).toBeInTheDocument();
   });
 
   it('Deve renderizar o componente com os elementos', () => {
     renderFormulario();
 
-    const input = screen.getByTestId('formulario-input');
-    const button = screen.getByTestId('formulario-button');
+    const input = screen.getByRole('textbox', { name: /todo/i });
+    const button = screen.getByRole('button');
 
     expect(input).toBeInTheDocument();
     expect(button).toBeInTheDocument();
@@ -36,8 +33,7 @@ describe('Formulario', () => {
     renderFormulario();
 
     const form = screen.getByTestId('formulario');
-
-    await fireEvent.submit(form);
+    fireEvent.submit(form);
 
     expect(inserirAtividade).toBeCalledTimes(1);
   });
@@ -46,12 +42,25 @@ describe('Formulario', () => {
     renderFormulario();
 
     const inputText = 'teste';
-    const input = screen.getByTestId('formulario-input');
+    const input = screen.getByRole('textbox', { name: /todo/i });
     await userEvent.type(input, inputText);
 
     const form = screen.getByTestId('formulario');
-    await fireEvent.submit(form);
+    fireEvent.submit(form);
 
     expect(inserirAtividade).toHaveBeenCalledWith(inputText);
+  });
+
+  it('Deve interagir com input', async () => {
+    renderFormulario();
+
+    const user = userEvent.setup();
+
+    const input = screen.getByRole('textbox', { name: /todo/i });
+
+    user.click(input);
+    await user.type(input, 'Testar Formulário');
+
+    expect(input).toHaveDisplayValue('Testar Formulário');
   });
 });
