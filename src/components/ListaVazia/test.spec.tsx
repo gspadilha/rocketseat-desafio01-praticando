@@ -2,12 +2,12 @@ import { render, screen } from '@testing-library/react';
 
 import { ListaVazia } from './index';
 
-const componente = <ListaVazia />;
-
 describe('Formulario', () => {
   it('Deve renderizar o componente', () => {
-    render(componente);
+    render(<ListaVazia />);
 
-    expect(screen.getByTestId('lista_vazia')).toBeInTheDocument();
+    expect(
+      screen.getByText(/você ainda não tem tarefas cadastradas/i),
+    ).toBeInTheDocument();
   });
 });

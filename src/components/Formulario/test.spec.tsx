@@ -1,20 +1,29 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import {
+  RenderResult,
+  fireEvent,
+  render,
+  screen,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+
+import { testarValidacaoDoNavegador } from '../../../test/jest/__utils__/form';
 
 import { Formulario } from './index';
 
 const inserirAtividade = jest.fn();
-const componente = <Formulario inserirAtividade={inserirAtividade} />;
+const renderFormulario = () =>
+  render(<Formulario inserirAtividade={inserirAtividade} />);
+
+let componenteRenderizado: RenderResult;
 
 describe('Formulario', () => {
   it('Deve renderizar o componente', () => {
-    render(componente);
-
+    renderFormulario();
     expect(screen.getByTestId('formulario')).toBeInTheDocument();
   });
 
   it('Deve renderizar o componente com os elementos', () => {
-    render(componente);
+    renderFormulario();
 
     const input = screen.getByTestId('formulario-input');
     const button = screen.getByTestId('formulario-button');
@@ -24,7 +33,7 @@ describe('Formulario', () => {
   });
 
   it('Deve chamar inserirAtividade ao submeter', async () => {
-    render(componente);
+    renderFormulario();
 
     const form = screen.getByTestId('formulario');
 
@@ -33,15 +42,14 @@ describe('Formulario', () => {
     expect(inserirAtividade).toBeCalledTimes(1);
   });
 
-  it('Deve chamar inserirAtividade ao submeter com o input do usuário', async () => {
-    render(componente);
+  it('Deve chamar inserirAtividade ao submeter COM o input do usuário', async () => {
+    renderFormulario();
 
     const inputText = 'teste';
+    const input = screen.getByTestId('formulario-input');
+    await userEvent.type(input, inputText);
 
     const form = screen.getByTestId('formulario');
-    const input = screen.getByTestId('formulario-input');
-
-    await userEvent.type(input, inputText);
     await fireEvent.submit(form);
 
     expect(inserirAtividade).toHaveBeenCalledWith(inputText);
