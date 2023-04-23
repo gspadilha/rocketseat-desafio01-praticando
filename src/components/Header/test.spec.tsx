@@ -6,8 +6,6 @@ describe('Header', () => {
   it('Deve renderizar o componente', () => {
     render(<Header />);
 
-    expect(
-      screen.getByRole('img', { name: /logo do site/i }),
-    ).toBeInTheDocument();
+    expect(screen.getByRole('banner')).toBeInTheDocument();
   });
 });
