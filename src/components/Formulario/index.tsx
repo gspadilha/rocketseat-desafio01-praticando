@@ -28,15 +28,12 @@ export function Formulario({ inserirAtividade }: IFormularioProps) {
   }, []);
 
   return (
-    <form
-      data-testid='formulario'
-      className={style.wrapperBody}
-      onSubmit={e => inserirTarefa(e)}
-    >
+    <form className={style.wrapperBody} onSubmit={e => inserirTarefa(e)}>
       <input
-        data-testid='formulario-input'
         type='text'
+        id='todo'
         name='todo'
+        aria-label='todo'
         placeholder='Adicione uma nova tarefa'
         className={style.input}
         value={tarefa}
@@ -49,11 +46,7 @@ export function Formulario({ inserirAtividade }: IFormularioProps) {
         required
       />
 
-      <button
-        data-testid='formulario-button'
-        type='submit'
-        className={style.button}
-      >
+      <button type='submit' className={style.button}>
         Criar
         <IoMdAddCircleOutline size={16} />
       </button>
