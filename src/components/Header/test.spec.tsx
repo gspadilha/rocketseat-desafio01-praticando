@@ -1,8 +1,8 @@
-import { Header } from './index';
-
 import { render, screen } from '@testing-library/react';
 
-describe('Header', () => {
+import { Header } from './index';
+
+describe('Componente Header', () => {
   it('Deve renderizar o componente', () => {
     render(<Header />);
 

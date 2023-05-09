@@ -1,9 +1,4 @@
-import {
-  RenderResult,
-  fireEvent,
-  render,
-  screen,
-} from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { Formulario } from './index';
@@ -16,13 +11,13 @@ describe('Formulario', () => {
   it('Deve renderizar o componente', () => {
     renderFormulario();
 
-    expect(screen.getByTestId('formulario')).toBeInTheDocument();
+    expect(screen.getByRole('form')).toBeInTheDocument();
   });
 
   it('Deve renderizar o componente com os elementos', () => {
     renderFormulario();
 
-    const input = screen.getByRole('textbox', { name: /todo/i });
+    const input = screen.getByRole('textbox', { name: /input/i });
     const button = screen.getByRole('button');
 
     expect(input).toBeInTheDocument();
@@ -32,7 +27,7 @@ describe('Formulario', () => {
   it('Deve chamar inserirAtividade ao submeter', async () => {
     renderFormulario();
 
-    const form = screen.getByTestId('formulario');
+    const form = screen.getByRole('form');
     fireEvent.submit(form);
 
     expect(inserirAtividade).toBeCalledTimes(1);
@@ -42,10 +37,10 @@ describe('Formulario', () => {
     renderFormulario();
 
     const inputText = 'teste';
-    const input = screen.getByRole('textbox', { name: /todo/i });
+    const input = screen.getByRole('textbox', { name: /input/i });
     await userEvent.type(input, inputText);
 
-    const form = screen.getByTestId('formulario');
+    const form = screen.getByRole('form');
     fireEvent.submit(form);
 
     expect(inserirAtividade).toHaveBeenCalledWith(inputText);
@@ -56,7 +51,7 @@ describe('Formulario', () => {
 
     const user = userEvent.setup();
 
-    const input = screen.getByRole('textbox', { name: /todo/i });
+    const input = screen.getByRole('textbox', { name: /input/i });
 
     user.click(input);
     await user.type(input, 'Testar Formulário');

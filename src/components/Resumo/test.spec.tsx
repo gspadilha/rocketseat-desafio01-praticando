@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import { Resumo } from './index';
 
-describe('Resumo', () => {
+describe('Componente Resumo', () => {
   it('Deve renderizar com valores zerados', () => {
     render(<Resumo criadas={0} concluidas={0} />);
 
