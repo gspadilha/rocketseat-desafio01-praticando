@@ -4,7 +4,7 @@ import style from './style.module.css';
 
 export function Resumo({ criadas, concluidas }: ITotalizadorAtividade) {
   return (
-    <section className={style.resumoTarefas}>
+    <section role='heading' className={style.resumoTarefas}>
       <div className={style.tarefasCriadas}>
         Tarefas Criadas<span>{criadas}</span>
       </div>
