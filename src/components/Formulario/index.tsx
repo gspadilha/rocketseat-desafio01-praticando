@@ -28,12 +28,16 @@ export function Formulario({ inserirAtividade }: IFormularioProps) {
   }, []);
 
   return (
-    <form className={style.wrapperBody} onSubmit={e => inserirTarefa(e)}>
+    <form
+      aria-label='form'
+      className={style.wrapperBody}
+      onSubmit={e => inserirTarefa(e)}
+    >
       <input
         type='text'
         id='todo'
         name='todo'
-        aria-label='todo'
+        aria-label='input'
         placeholder='Adicione uma nova tarefa'
         className={style.input}
         value={tarefa}

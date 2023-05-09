@@ -18,7 +18,7 @@ export function Lista({
   deletarAtividade,
 }: IListaProps) {
   return (
-    <div key={item.id} className={style.tarefa}>
+    <div aria-label='lista' key={item.id} className={style.tarefa}>
       <CustomCheckbox
         done={item.done}
         onDone={checked => realizarAtividade(item.id, checked)}
