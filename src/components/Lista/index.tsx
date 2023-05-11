@@ -2,31 +2,38 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 
 import { CustomCheckbox } from '../CustomCheckbox';
 
-import { IAtividade } from '../../context/TodoContextProvider';
+import { IAtividade } from '../../hooks/useTodo';
 
 import style from './style.module.css';
 
 interface IListaProps {
-  item: IAtividade;
+  atividade: IAtividade;
   realizarAtividade: (id: number, checked: boolean) => void;
   deletarAtividade: (id: number) => void;
 }
 
 export function Lista({
-  item,
+  atividade,
   realizarAtividade,
   deletarAtividade,
 }: IListaProps) {
   return (
-    <div aria-label='lista' key={item.id} className={style.tarefa}>
+    <div aria-label='lista' key={atividade.id} className={style.tarefa}>
       <CustomCheckbox
-        done={item.done}
-        onDone={checked => realizarAtividade(item.id, checked)}
+        done={atividade.done}
+        onDone={checked => realizarAtividade(atividade.id, checked)}
       />
-      <p className={item.done ? style.tarefaConcluida : ''} tabIndex={item.id}>
-        {item.description}
+      <p
+        className={atividade.done ? style.tarefaConcluida : ''}
+        tabIndex={atividade.id}
+      >
+        {atividade.description}
       </p>
-      <RiDeleteBin6Line size={20} onClick={() => deletarAtividade(item.id)} />
+      <RiDeleteBin6Line
+        aria-label='delete-button'
+        size={20}
+        onClick={() => deletarAtividade(atividade.id)}
+      />
     </div>
   );
 }

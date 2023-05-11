@@ -32,7 +32,7 @@ export function Body() {
           atividades.map(item => (
             <Lista
               key={item.id}
-              item={item}
+              atividade={item}
               realizarAtividade={realizarAtividade}
               deletarAtividade={deletarAtividade}
             />

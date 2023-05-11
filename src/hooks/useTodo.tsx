@@ -1,4 +1,11 @@
-import { ReactNode, createContext, useEffect, useMemo, useState } from 'react';
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 export interface IAtividade {
   id: number;
@@ -27,7 +34,7 @@ interface ITodoProviderProps {
   children: ReactNode;
 }
 
-export const TodoContextProvider: React.FC<ITodoProviderProps> = ({
+export const TodoProvider: React.FC<ITodoProviderProps> = ({
   children,
 }: ITodoProviderProps) => {
   const [atividades, setAtividades] = useState<Array<IAtividade>>([]);
@@ -96,4 +103,8 @@ export const TodoContextProvider: React.FC<ITodoProviderProps> = ({
   }, [atividades, totalizador]);
 
   return <ToDoContext.Provider value={value}>{children}</ToDoContext.Provider>;
+};
+
+export const useToDo = (): IToDoContextProps => {
+  return useContext(ToDoContext);
 };

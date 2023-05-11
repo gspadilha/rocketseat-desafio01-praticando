@@ -1,12 +1,14 @@
 import { render, screen } from '@testing-library/react';
 
+import { useToDo } from '../../hooks/useTodo';
+
 import { Body } from './index';
 
 let mock = {
   atividades: [
     {
       id: 1,
-      description: 'Testar',
+      description: 'Testar 1',
       done: false,
     },
   ],
@@ -14,16 +16,23 @@ let mock = {
   deletarAtividade: jest.fn(),
   realizarAtividade: jest.fn(),
   totalizador: {
-    criadas: 0,
+    criadas: 1,
     concluidas: 0,
   },
 };
 
-jest.mock('../../hooks/useTodo', () => ({
-  useToDo: () => mock,
-}));
+jest.mock('../../hooks/useTodo');
 
 describe('Componente Body', () => {
+  beforeEach(() => {
+    const useToDoMocked = jest.mocked(useToDo, { shallow: true });
+
+    mock.atividades = [];
+    mock.totalizador.criadas = 0;
+
+    useToDoMocked.mockReturnValueOnce(mock);
+  });
+
   it('deve renderizar o componente Formulario', () => {
     render(<Body />);
     expect(screen.getByRole('form')).toBeInTheDocument();
@@ -35,15 +44,6 @@ describe('Componente Body', () => {
   });
 
   describe('se NÃO possuir atividades', () => {
-    beforeEach(() => {
-      mock.atividades = [];
-      mock.totalizador.criadas = 0;
-    });
-
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-
     it('deve renderizar o componente Lista Vazia ', () => {
       render(<Body />);
       expect(screen.getByLabelText('lista-vazia')).toBeInTheDocument();
@@ -65,12 +65,12 @@ describe('Componente Body', () => {
     ];
 
     beforeEach(() => {
-      mock.atividades = atividades;
-      mock.totalizador.criadas = atividades.length;
-    });
+      const useToDoMocked = jest.mocked(useToDo, { shallow: true });
 
-    afterEach(() => {
-      jest.clearAllMocks();
+      mock.atividades = [...atividades];
+      mock.totalizador.criadas = atividades.length;
+
+      useToDoMocked.mockReturnValueOnce(mock);
     });
 
     it('NÃO deve renderizar o componente Lista Vazia ', () => {
@@ -103,12 +103,12 @@ describe('Componente Body', () => {
     ];
 
     beforeEach(() => {
-      mock.atividades = atividades;
-      mock.totalizador.criadas = atividades.length;
-    });
+      const useToDoMocked = jest.mocked(useToDo, { shallow: true });
 
-    afterEach(() => {
-      jest.clearAllMocks();
+      mock.atividades = [...atividades];
+      mock.totalizador.criadas = atividades.length;
+
+      useToDoMocked.mockReturnValueOnce(mock);
     });
 
     it('NÃO deve renderizar o componente Lista Vazia ', () => {
