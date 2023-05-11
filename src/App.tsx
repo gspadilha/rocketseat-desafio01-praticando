@@ -1,15 +1,15 @@
 import { Header } from './components/Header';
 import { Body } from './components/Body';
 
-import { TodoContextProvider } from './context/TodoContextProvider';
+import { TodoProvider } from './hooks/useTodo';
 
 function App() {
   return (
     <>
       <Header />
-      <TodoContextProvider>
+      <TodoProvider>
         <Body />
-      </TodoContextProvider>
+      </TodoProvider>
     </>
   );
 }
