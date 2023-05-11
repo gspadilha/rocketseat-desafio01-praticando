@@ -22,7 +22,6 @@ export default {
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: [
     '<rootDir>/src/components/**/*.ts*',
-    '<rootDir>/src/context/**/*.ts*',
     '<rootDir>/src/hooks/**/*.ts*',
   ],
 
