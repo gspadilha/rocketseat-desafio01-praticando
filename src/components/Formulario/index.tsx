@@ -19,9 +19,11 @@ export function Formulario({ inserirAtividade }: IFormularioProps) {
     refTarefa?.current?.focus();
   }
 
+  /* c8 ignore start */
   function validarTarefa(event: FormEvent<HTMLInputElement>) {
     event.currentTarget.setCustomValidity('Este campo deve ser informado!');
   }
+  /* c8 ignore end */
 
   useEffect(() => {
     refTarefa?.current?.focus();

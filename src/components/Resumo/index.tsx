@@ -1,4 +1,4 @@
-import { ITotalizadorAtividade } from '../../context/TodoContextProvider';
+import { ITotalizadorAtividade } from '../../hooks/useTodo';
 
 import style from './style.module.css';
 
