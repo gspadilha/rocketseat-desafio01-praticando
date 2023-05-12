@@ -1,17 +1,23 @@
-import { ITotalizadorAtividade } from '../../hooks/useTodo';
+import { useToDo } from '../../hooks/useTodo';
 
 import style from './style.module.css';
 
-export function Resumo({ criadas, concluidas }: ITotalizadorAtividade) {
+export function Resumo() {
+  const { totalizador } = useToDo();
+
   return (
     <section role='heading' className={style.resumoTarefas}>
       <div className={style.tarefasCriadas}>
-        Tarefas Criadas<span>{criadas}</span>
+        Tarefas Criadas<span>{totalizador.criadas}</span>
       </div>
 
       <div className={style.tarefasConcluidas}>
         Concluídas
-        <span>{criadas === 0 ? '0' : `${concluidas} de ${criadas}`}</span>
+        <span>
+          {totalizador.criadas === 0
+            ? '0'
+            : `${totalizador.concluidas} de ${totalizador.criadas}`}
+        </span>
       </div>
     </section>
   );

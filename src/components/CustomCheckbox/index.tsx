@@ -1,21 +1,19 @@
 import { useState } from 'react';
 
+import { IAtividade, useToDo } from '../../hooks/useTodo';
+
 import style from './style.module.css';
 
-interface ICustomCheckboxProps {
-  done: boolean;
-  onDone: (checked: boolean) => void;
-}
+type ICustomCheckboxProps = Omit<IAtividade, 'description'>;
 
-export function CustomCheckbox({ done, onDone }: ICustomCheckboxProps) {
+export function CustomCheckbox({ id, done }: ICustomCheckboxProps) {
+  const { realizarAtividade } = useToDo();
+
   const [checked, setChecked] = useState(done);
 
   function handleOnChange(checked: boolean) {
     setChecked(v => !v);
-
-    if (onDone) {
-      onDone(checked);
-    }
+    realizarAtividade(id, checked);
   }
 
   return (

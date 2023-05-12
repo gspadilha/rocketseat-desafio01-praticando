@@ -1,11 +1,4 @@
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { ReactNode, createContext, useContext, useMemo, useState } from 'react';
 
 export interface IAtividade {
   id: number;
@@ -38,19 +31,16 @@ export const TodoProvider: React.FC<ITodoProviderProps> = ({
   children,
 }: ITodoProviderProps) => {
   const [atividades, setAtividades] = useState<Array<IAtividade>>([]);
-  const [totalizador, setTotalizador] = useState<ITotalizadorAtividade>({
-    criadas: 0,
-    concluidas: 0,
-  });
 
-  useEffect(() => {
-    const totalConcluidas = atividades.reduce(
-      (acc, item) => (item.done ? acc + 1 : acc),
-      0,
-    );
+  const totalConcluidas = atividades.reduce(
+    (acc, item) => (item.done ? acc + 1 : acc),
+    0,
+  );
 
-    setTotalizador({ criadas: atividades.length, concluidas: totalConcluidas });
-  }, [atividades]);
+  const totalizador = {
+    criadas: atividades.length,
+    concluidas: totalConcluidas,
+  };
 
   function getMaxId() {
     if (atividades.length === 0) {

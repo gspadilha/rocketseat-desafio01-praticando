@@ -1,39 +1,37 @@
 import { RiDeleteBin6Line } from 'react-icons/ri';
 
 import { CustomCheckbox } from '../CustomCheckbox';
+import { ListaVazia } from '../ListaVazia';
 
-import { IAtividade } from '../../hooks/useTodo';
+import { useToDo } from '../../hooks/useTodo';
 
 import style from './style.module.css';
 
-interface IListaProps {
-  atividade: IAtividade;
-  realizarAtividade: (id: number, checked: boolean) => void;
-  deletarAtividade: (id: number) => void;
-}
+export function Lista() {
+  const { atividades, deletarAtividade } = useToDo();
 
-export function Lista({
-  atividade,
-  realizarAtividade,
-  deletarAtividade,
-}: IListaProps) {
+  if (atividades.length === 0) {
+    return <ListaVazia />;
+  }
+
   return (
-    <div aria-label='lista' key={atividade.id} className={style.tarefa}>
-      <CustomCheckbox
-        done={atividade.done}
-        onDone={checked => realizarAtividade(atividade.id, checked)}
-      />
-      <p
-        className={atividade.done ? style.tarefaConcluida : ''}
-        tabIndex={atividade.id}
-      >
-        {atividade.description}
-      </p>
-      <RiDeleteBin6Line
-        aria-label='delete-button'
-        size={20}
-        onClick={() => deletarAtividade(atividade.id)}
-      />
-    </div>
+    <>
+      {atividades.map(item => (
+        <div aria-label='lista' key={item.id} className={style.tarefa}>
+          <CustomCheckbox id={item.id} done={item.done} />
+          <p
+            className={item.done ? style.tarefaConcluida : ''}
+            tabIndex={item.id}
+          >
+            {item.description}
+          </p>
+          <RiDeleteBin6Line
+            aria-label='delete-button'
+            size={20}
+            onClick={() => deletarAtividade(item.id)}
+          />
+        </div>
+      ))}
+    </>
   );
 }
