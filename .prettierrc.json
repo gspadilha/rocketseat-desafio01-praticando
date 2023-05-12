@@ -9,5 +9,5 @@
   "bracketSameLine": false,
   "jsxBracketSameLine": false,
   "arrowParens": "avoid",
-  "endOfLine": "lf"
+  "endOfLine": "auto"
 }

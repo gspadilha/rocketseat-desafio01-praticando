@@ -20,10 +20,7 @@ export default {
   collectCoverage: false,
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
-  collectCoverageFrom: [
-    '<rootDir>/src/components/**/*.ts*',
-    '<rootDir>/src/hooks/**/*.ts*',
-  ],
+  // collectCoverageFrom: undefined,
 
   // The directory where Jest should output its coverage files
   coverageDirectory: 'coverage',
@@ -92,9 +89,10 @@ export default {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '\\.(css|less|scss)$': '<rootDir>/test/jest/__mocks__/styleMock.ts',
+    '\\.(css|less|scss|sass)$':
+      '<rootDir>/__test__/jest/__mocks__/styleMock.ts',
     '\\.(jpg|jpeg|png|gif|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
-      '<rootDir>/test/jest/__mocks__/fileMock.ts',
+      '<rootDir>/__test__/jest/__mocks__/fileMock.ts',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
