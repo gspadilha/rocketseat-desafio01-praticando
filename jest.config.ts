@@ -89,9 +89,9 @@ export default {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '\\.(css|less|scss|sass)$':
+    '^.+\\.(css|less|scss|sass)$':
       '<rootDir>/__test__/jest/__mocks__/styleMock.ts',
-    '\\.(jpg|jpeg|png|gif|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+    '^.+\\.(jpg|jpeg|png|gif|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       '<rootDir>/__test__/jest/__mocks__/fileMock.ts',
   },
 
