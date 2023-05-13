@@ -1,4 +1,4 @@
-import { useToDo } from '../../hooks/useTodo';
+import useToDo from '../../hooks/useTodo';
 
 import style from './style.module.css';
 

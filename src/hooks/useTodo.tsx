@@ -95,6 +95,8 @@ export const TodoProvider: React.FC<ITodoProviderProps> = ({
   return <ToDoContext.Provider value={value}>{children}</ToDoContext.Provider>;
 };
 
-export const useToDo = (): IToDoContextProps => {
+const useToDo = (): IToDoContextProps => {
   return useContext(ToDoContext);
 };
+
+export default useToDo;

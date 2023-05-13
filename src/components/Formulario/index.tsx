@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { IoMdAddCircleOutline } from 'react-icons/io';
 
-import { useToDo } from '../../hooks/useTodo';
+import useToDo from '../../hooks/useTodo';
 
 import style from './style.module.css';
 

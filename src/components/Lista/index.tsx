@@ -3,7 +3,7 @@ import { RiDeleteBin6Line } from 'react-icons/ri';
 import { CustomCheckbox } from '../CustomCheckbox';
 import { ListaVazia } from '../ListaVazia';
 
-import { useToDo } from '../../hooks/useTodo';
+import useToDo from '../../hooks/useTodo';
 
 import style from './style.module.css';
 

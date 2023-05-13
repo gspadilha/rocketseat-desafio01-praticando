@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { IAtividade, useToDo } from '../../hooks/useTodo';
+import useToDo, { IAtividade } from '../../hooks/useTodo';
 
 import style from './style.module.css';
 
