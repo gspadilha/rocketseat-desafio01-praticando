@@ -1,25 +1,42 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
+import useToDo, { IToDoContextProps } from '../../hooks/useTodo';
+
 import { CustomCheckbox } from './index';
 
+const mock: IToDoContextProps = {
+  atividades: [],
+  inserirAtividade: jest.fn(),
+  deletarAtividade: jest.fn(),
+  realizarAtividade: jest.fn(),
+  totalizador: {
+    criadas: 0,
+    concluidas: 0,
+  },
+};
+
+jest.mock('../../hooks/useTodo');
+
 describe('Componente CustomCheckbox', () => {
-  const renderComponent = () => {
-    const onDone = jest.fn();
+  beforeEach(() => {
+    const useToDoMocked = jest.mocked(useToDo, { shallow: true });
+    useToDoMocked.mockReturnValue(mock);
+  });
 
-    render(<CustomCheckbox done={false} onDone={onDone} />);
+  it('deve renderizar o componente', () => {
+    render(<CustomCheckbox id={1} done={false} />);
 
-    return {
-      onDone,
-    };
-  };
+    expect(screen.getByRole('checkbox')).toBeInTheDocument();
+  });
 
-  it('deve renderizar o component', () => {
-    renderComponent();
+  it('deve renderizar o componente marcado', () => {
+    render(<CustomCheckbox id={1} done={true} />);
+
     expect(screen.getByRole('checkbox')).toBeInTheDocument();
   });
 
   it('deve permitir marcar o componente', () => {
-    const { onDone } = renderComponent();
+    render(<CustomCheckbox id={0} done={false} />);
 
     const checkboxElement = screen.getByRole('checkbox');
 
@@ -28,6 +45,6 @@ describe('Componente CustomCheckbox', () => {
     fireEvent.click(checkboxElement);
 
     expect(checkboxElement).toBeChecked();
-    expect(onDone).toHaveBeenCalledTimes(1);
+    expect(mock.realizarAtividade).toBeCalledTimes(1);
   });
 });

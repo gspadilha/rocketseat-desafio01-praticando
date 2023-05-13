@@ -1,6 +1,6 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
 
-import { TodoProvider, useToDo } from './useTodo';
+import useToDo, { TodoProvider } from './useTodo';
 
 describe('Testar Context Provider e useTodo', () => {
   it('deve inserir uma primeira atividade com o índice correto', () => {

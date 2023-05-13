@@ -1,53 +1,42 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import useToDo, { IToDoContextProps } from '../../hooks/useTodo';
+
 import { Formulario } from './index';
 
-const inserirAtividade = jest.fn();
-const renderFormulario = () =>
-  render(<Formulario inserirAtividade={inserirAtividade} />);
+const mock: IToDoContextProps = {
+  atividades: [],
+  inserirAtividade: jest.fn(),
+  deletarAtividade: jest.fn(),
+  realizarAtividade: jest.fn(),
+  totalizador: {
+    criadas: 0,
+    concluidas: 0,
+  },
+};
 
-describe('Formulario', () => {
-  it('Deve renderizar o componente', () => {
-    renderFormulario();
+jest.mock('../../hooks/useTodo');
 
-    expect(screen.getByRole('form')).toBeInTheDocument();
+describe('Componente Formulario', () => {
+  beforeEach(() => {
+    const useToDoMocked = jest.mocked(useToDo, { shallow: true });
+    useToDoMocked.mockReturnValue(mock);
   });
 
-  it('Deve renderizar o componente com os elementos', () => {
-    renderFormulario();
+  it('deve renderizar o componente com todos os elementos', () => {
+    render(<Formulario />);
 
     const input = screen.getByRole('textbox', { name: /input/i });
     const button = screen.getByRole('button');
 
+    expect(screen.getByRole('form')).toBeInTheDocument();
     expect(input).toBeInTheDocument();
     expect(button).toBeInTheDocument();
   });
 
-  it('Deve chamar inserirAtividade ao submeter', async () => {
-    renderFormulario();
-
-    const form = screen.getByRole('form');
-    fireEvent.submit(form);
-
-    expect(inserirAtividade).toBeCalledTimes(1);
-  });
-
-  it('Deve chamar inserirAtividade ao submeter COM o input do usuário', async () => {
-    renderFormulario();
-
-    const inputText = 'teste';
-    const input = screen.getByRole('textbox', { name: /input/i });
-    await userEvent.type(input, inputText);
-
-    const form = screen.getByRole('form');
-    fireEvent.submit(form);
-
-    expect(inserirAtividade).toHaveBeenCalledWith(inputText);
-  });
-
-  it('Deve interagir com input', async () => {
-    renderFormulario();
+  it('deve interagir com input', async () => {
+    render(<Formulario />);
 
     const user = userEvent.setup();
 
@@ -57,5 +46,14 @@ describe('Formulario', () => {
     await user.type(input, 'Testar Formulário');
 
     expect(input).toHaveDisplayValue('Testar Formulário');
+  });
+
+  it('Deve chamar inserirAtividade ao submeter', async () => {
+    render(<Formulario />);
+
+    const form = screen.getByRole('form');
+    fireEvent.submit(form);
+
+    expect(mock.inserirAtividade).toBeCalledTimes(1);
   });
 });

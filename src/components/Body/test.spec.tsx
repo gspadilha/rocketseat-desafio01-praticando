@@ -1,22 +1,16 @@
 import { render, screen } from '@testing-library/react';
 
-import { useToDo } from '../../hooks/useTodo';
+import useToDo, { IAtividade, IToDoContextProps } from '../../hooks/useTodo';
 
 import { Body } from './index';
 
-let mock = {
-  atividades: [
-    {
-      id: 1,
-      description: 'Testar 1',
-      done: false,
-    },
-  ],
+const mock: IToDoContextProps = {
+  atividades: [],
   inserirAtividade: jest.fn(),
   deletarAtividade: jest.fn(),
   realizarAtividade: jest.fn(),
   totalizador: {
-    criadas: 1,
+    criadas: 0,
     concluidas: 0,
   },
 };
@@ -26,37 +20,32 @@ jest.mock('../../hooks/useTodo');
 describe('Componente Body', () => {
   beforeEach(() => {
     const useToDoMocked = jest.mocked(useToDo, { shallow: true });
-
-    mock.atividades = [];
-    mock.totalizador.criadas = 0;
-
-    useToDoMocked.mockReturnValueOnce(mock);
+    useToDoMocked.mockReturnValue(mock);
   });
 
-  it('deve renderizar o componente Formulario', () => {
+  it('deve sempre renderizar os componentes Formulário e Resumo', () => {
     render(<Body />);
+
     expect(screen.getByRole('form')).toBeInTheDocument();
-  });
-
-  it('deve renderizar o componente Resumo', () => {
-    render(<Body />);
     expect(screen.getByRole('heading')).toBeInTheDocument();
   });
 
   describe('se NÃO possuir atividades', () => {
     it('deve renderizar o componente Lista Vazia ', () => {
       render(<Body />);
+
       expect(screen.getByLabelText('lista-vazia')).toBeInTheDocument();
     });
 
     it('NÃO deve renderizar o componente Lista', () => {
       render(<Body />);
+
       expect(screen.queryByLabelText('lista')).not.toBeInTheDocument();
     });
   });
 
-  describe('se possuir 1 atividade', () => {
-    const atividades = [
+  describe('se possuir uma atividade', () => {
+    const atividades: Array<IAtividade> = [
       {
         id: 1,
         description: 'Testar',
@@ -75,12 +64,15 @@ describe('Componente Body', () => {
 
     it('NÃO deve renderizar o componente Lista Vazia ', () => {
       render(<Body />);
+
       expect(screen.queryByLabelText('lista-vazia')).not.toBeInTheDocument();
     });
 
-    it('deve renderizar o componente Lista com 1 atividade', () => {
+    it('deve renderizar o componente Lista com uma atividade', () => {
       render(<Body />);
+
       const listaElements = screen.getAllByLabelText('lista');
+
       expect(listaElements).toHaveLength(atividades.length);
       listaElements.forEach(element => {
         expect(element).toBeInTheDocument();
@@ -88,8 +80,8 @@ describe('Componente Body', () => {
     });
   });
 
-  describe('se possuir N atividades', () => {
-    const atividades = [
+  describe('se possuir mais de uma atividade', () => {
+    const atividades: Array<IAtividade> = [
       {
         id: 1,
         description: 'Testar 1',
@@ -113,12 +105,15 @@ describe('Componente Body', () => {
 
     it('NÃO deve renderizar o componente Lista Vazia ', () => {
       render(<Body />);
+
       expect(screen.queryByLabelText('lista-vazia')).not.toBeInTheDocument();
     });
 
     it(`deve renderizar o componente Lista com ${atividades.length} atividades`, () => {
       render(<Body />);
+
       const listaElements = screen.getAllByLabelText('lista');
+
       expect(listaElements).toHaveLength(atividades.length);
       listaElements.forEach(element => {
         expect(element).toBeInTheDocument();
